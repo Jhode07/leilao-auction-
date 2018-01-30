@@ -40,6 +40,7 @@ public class Cadastro extends JPanel {
     private static JTextField campoEmail, campoNome;
 	private static JPasswordField primeirasenha, confirmacaoSenha;
 	private static JLabel email, nome, senha, OK, mesmasenha;
+	public static String nomecadastrado, emailcadastrado, senhacadastrada, confirmacaosenhacadastrada;
     {
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
@@ -132,8 +133,13 @@ public class Cadastro extends JPanel {
     				OK.setBorder(BorderFactory.createEtchedBorder());
     			}
 
-    			public void mouseClicked(MouseEvent e) {
+    			@SuppressWarnings("deprecation")
+				public void mouseClicked(MouseEvent e) {
     				Inicio y = new Inicio ();
+    				nomecadastrado = campoNome.getText();
+    				emailcadastrado = campoEmail.getText();
+    				senhacadastrada = primeirasenha.getText();
+    				confirmacaosenhacadastrada = confirmacaoSenha.getText();
     				y.setVisible(true);
     				janelacadastro.dispose();
     				

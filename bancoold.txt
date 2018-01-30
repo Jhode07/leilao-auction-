@@ -1,0 +1,60 @@
+import java.io.*;
+
+public class banco  {
+	public static String usuario, senha, x, y;
+	public static String user = "";
+	public static String password = "";
+	public static boolean tag = false;
+	
+	public banco () throws IOException {
+		usuario = Inicio.userdigit;
+		senha = Inicio.passdigit;
+		
+		String txt = "C:\\Users\\jorge\\OneDrive\\Documentos\\leilao-auction-\\pass.txt";
+		/*FileWriter arq = new FileWriter("C:\\Users\\jorge\\OneDrive\\Documentos\\leilao-auction-\\pass.txt");
+	    PrintWriter gravarArq = new PrintWriter(arq);
+	    gravarArq.printf ("%s:%s", x, y);
+	    arq.close();*/
+	    
+	    try {
+	    	//user = "";
+	    	int cont;
+	        FileReader arq = new FileReader(txt);
+	        BufferedReader lerArq = new BufferedReader(arq);
+	        String linha = lerArq.readLine();
+	        for(cont = 0; cont < linha.length(); cont++){  
+		        char letra = linha.charAt(cont);  
+		        if(letra == ':'){
+		        	tag = true;
+		        } else if(!tag){
+		        	user += letra;
+		        } 
+		        if(letra == ';'){
+		        	break;
+		      }  	
+	      
+	       validate aut = new validate ();
+	       password = "";
+	       
+	       for(int i = cont; i < linha.length(); i++){  
+		        char letra = linha.charAt(i);
+		        if(letra == ';'){
+		        	tag = false;
+		        } else if(!tag){
+		        	password += letra;
+		        } 
+		        if(letra == ' '){
+		        	break;
+		        }  	   
+		    }
+	    
+	        arq.close();
+	      } catch (IOException e) {
+	          System.out.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+	      }
+		
+		
+		
+	}
+
+}

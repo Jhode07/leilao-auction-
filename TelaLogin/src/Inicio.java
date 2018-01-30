@@ -8,6 +8,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -35,6 +38,8 @@ import java.awt.color.*;
 
 public class Inicio extends JPanel {
     Image imageOrg = null;
+    public static String userdigit = null;
+    public static String passdigit = null;
     private static JTextField campoTexto;
 	private static JPasswordField senha;
 	private static JLabel login;
@@ -96,6 +101,7 @@ public class Inicio extends JPanel {
     		campoTexto.setHorizontalAlignment(SwingConstants.LEFT);
     		painel.add(campoTexto, "cell 3 2,alignx left,aligny center, spanx");
     		
+    		
     		pass = new JLabel("Senha: ");
     		pass.setHorizontalAlignment(SwingConstants.LEFT);
     		pass.setForeground(new Color(255, 255, 255));
@@ -105,6 +111,51 @@ public class Inicio extends JPanel {
     		senha = new JPasswordField(20);
     		senha.setHorizontalAlignment(SwingConstants.LEFT);
     		painel.add(senha, "cell 3 4,alignx left,spanx");
+    		senha.addKeyListener(new KeyAdapter(){
+
+				@SuppressWarnings("deprecation")
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					userdigit = campoTexto.getText();
+    				passdigit = senha.getText();
+					if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+						try {
+							banco y = new banco();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						boolean teste = validate.validation;
+						
+						if (teste) {
+	    					senha.setText("");
+	    					JOptionPane.showMessageDialog(janela, "Login Efetuado ! ");
+	    				}
+	    				else {
+	    					senha.setText("");
+	    					JOptionPane.showMessageDialog(janela, "Usuário e/ou Senha Incorretos", "Problema na Autenticação", JOptionPane.ERROR_MESSAGE);
+	    				}
+	    				if (!x) {
+	    					campoTexto.setText("");
+	    				}
+	    				
+					}
+					
+				}
+
+				@Override
+				public void keyReleased(KeyEvent arg0) {
+					
+					
+				}
+
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+    			
+    		});
 
     		checkbox = new Checkbox("Lembrar login");
     		checkbox.setBackground(new Color (133, 63, 9));
@@ -134,12 +185,29 @@ public class Inicio extends JPanel {
     			public void mousePressed(MouseEvent arg0) {
     				btnlogin.setBorder(BorderFactory.createEtchedBorder());
     			}
-    			public void mouseClicked(MouseEvent e) {
-    				senha.setText("");
-    				JOptionPane.showMessageDialog(janela, "Login Efetuado ! ");
+    			@SuppressWarnings("deprecation")
+				public void mouseClicked(MouseEvent e) {
+    				userdigit = campoTexto.getText();
+    				passdigit = senha.getText();
+    				try {
+						banco y = new banco();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+    				boolean teste = validate.validation;
+    				if (teste) {
+    					senha.setText("");
+    					JOptionPane.showMessageDialog(janela, "Login Efetuado ! ");
+    				}
+    				else {
+    					senha.setText("");
+    					JOptionPane.showMessageDialog(janela, "Usuário e/ou Senha Incorretos", "Problema na Autenticação", JOptionPane.ERROR_MESSAGE);
+    				}
     				if (!x) {
     					campoTexto.setText("");
     				}
+    				
     			}
     			public void mouseReleased(MouseEvent e) {
     			}
